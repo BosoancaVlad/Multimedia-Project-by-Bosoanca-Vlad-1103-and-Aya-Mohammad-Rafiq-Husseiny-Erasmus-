@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Romania Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<style>
+    #map {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+:root {
+    --bg-light: #f5f5f5;
+    --bg-dark: #1c1c1c;
+    --text-light: #1c1c1c;
+    --text-dark: #f5f5f5;
+}
+body {
+margin: 0;
+padding: 20px;
+font-family: Arial, Helvetica, sans-serif;
+background: var(--bg-light);
+color: var(--text-light);
+transition: background 0.4s ease, color 0.4s ease;}
+@media (prefers-color-scheme: dark) {
+body {
+background: var(--bg-dark);
+color: var(--text-dark);
+h2 {
+margin-bottom: 20px;
+font-size: 28px;
+letter-spacing: 1px;}
+iframe {
+width: 100%;
+height: 500px;
+border: none;
+border-radius: 12px;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+transition: transform 0.3s ease;}
+iframe:hover {
+transform: scale(1.02);}
+</style>
+</head>
+<body>
+<center>
+<h2>Map of Romania</h2>
+<div id="map"></div>
+</center>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+// Create the map and center it on Romania
+var map = L.map('map').setView([45.9432, 24.9668], 7);
+// Add OpenStreetMap layer
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+}).addTo(map);
+// List of city markers
+const cities = [
+    { name: "Bucharest", coords: [44.4268, 26.1025] },
+    { name: "Cluj-Napoca", coords: [46.7712, 23.6236] },
+    { name: "Iași", coords: [47.1585, 27.6014] },
+    { name: "Timișoara", coords: [45.7489, 21.2087] },
+    { name: "Constanța", coords: [44.1598, 28.6348] },
+    { name: "Brașov", coords: [45.6579, 25.6012] },
+    { name: "Giurgiu", coords: [43.9037, 25.9699] },
+    { name: "Tulcea", coords: [45.1716, 28.7914] },
+    { name: "Oradea", coords: [47.0722, 21.9217] },
+    { name: "Arad", coords: [46.1866, 21.3123] },
+    { name: "Târgu Mureș", coords: [46.5425, 24.5575] },
+    { name: "Piatra-Neamț", coords: [46.9291, 26.3701] },
+    { name: "Brăila", coords: [45.2710, 27.9570] },
+    { name: "Sfântu Gheorghe", coords: [45.8667, 25.7833] },
+    { name: "Miercurea Ciuc", coords: [46.3610, 25.5240] },
+    { name: "Drobeta-Turnu Severin", coords: [44.6369, 22.6597] }
+];
+// Add markers to map
+cities.forEach(city => {
+    L.marker(city.coords)
+    .addTo(map)
+    .bindPopup(`<b>${city.name}</b>`);
+});
+</script>
+</body>
+</html>
